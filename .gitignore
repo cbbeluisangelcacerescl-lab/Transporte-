@@ -1,0 +1,15 @@
+# Dependencies and generated build output
+**/node_modules/
+**/dist/
+**/.angular/
+
+# Local configuration and secrets
+**/.env
+**/.env.*
+!**/.env.example
+
+# Local editor, logs and operating-system files
+.DS_Store
+Thumbs.db
+*.log
+npm-debug.log*

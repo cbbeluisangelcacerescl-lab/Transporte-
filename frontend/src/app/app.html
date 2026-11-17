@@ -1,0 +1,250 @@
+@if (!profile()) {
+  <main class="welcome-screen">
+    <div class="welcome-noise"></div>
+    <svg class="mountain-art" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <linearGradient id="sky" x1="0" y1="0" x2="0.9" y2="1">
+          <stop offset="0" stop-color="#0b1517"/>
+          <stop offset=".48" stop-color="#263438"/>
+          <stop offset=".76" stop-color="#b35c34"/>
+          <stop offset="1" stop-color="#f0a255"/>
+        </linearGradient>
+        <linearGradient id="road" x1="0" y1="0" x2="0" y2="1">
+          <stop stop-color="#273238"/>
+          <stop offset="1" stop-color="#11191d"/>
+        </linearGradient>
+        <linearGradient id="horizon" x1="0" y1="0" x2="1" y2="0">
+          <stop stop-color="#e18449" stop-opacity="0"/>
+          <stop offset=".54" stop-color="#f5a760" stop-opacity=".8"/>
+          <stop offset="1" stop-color="#e18449" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      <rect width="1600" height="900" fill="url(#sky)"/>
+      <circle cx="950" cy="446" r="115" fill="#f3a965" opacity=".23"/>
+      <circle cx="950" cy="446" r="74" fill="#ffc47d" opacity=".28"/>
+      <path d="M0 500 170 342 280 426 442 252 578 422 765 282 922 455 1094 305 1267 443 1428 324 1600 454V900H0Z" fill="#384345"/>
+      <path d="m0 554 215-122 153 94 204-174 142 175 191-140 171 142 154-112 174 145 196-128v371H0Z" fill="#273336"/>
+      <path d="m0 616 238-94 185 70 197-101 183 111 188-72 190 93 204-103 215 78v302H0Z" fill="#1a2529"/>
+      <path d="M0 652h1600" stroke="url(#horizon)" stroke-width="2"/>
+      <path d="M650 900 813 642h261L1370 900Z" fill="url(#road)"/>
+      <path d="m893 900 52-258h33l77 258Z" fill="#f1bc72" opacity=".72"/>
+      <path d="m989 900 4-36h13l9 36m-9-112 2-23h9l5 23m-6-88 1-17h7l4 17" fill="#fff4d5" opacity=".8"/>
+      <path d="M0 737 649 652m951 86-485-86" stroke="#f8a560" stroke-opacity=".16" stroke-width="2"/>
+      <g class="animated-truck">
+        <animateMotion dur="24s" repeatCount="indefinite" path="M 0 0 C -22 6 -58 26 -108 42"/>
+        <rect x="875" y="575" width="154" height="66" rx="5" fill="#d2ded0"/>
+        <rect x="884" y="584" width="136" height="48" rx="2" fill="#edf0df"/>
+        <rect x="1029" y="596" width="58" height="45" rx="5" fill="#e1a05f"/>
+        <path d="m1037 597 20-21h24l12 21Z" fill="#f2bc77"/>
+        <path d="M1043 599h20v16h-20Z" fill="#34454a"/>
+        <path d="M1067 599h17l8 16h-25Z" fill="#34454a"/>
+        <rect x="1079" y="624" width="8" height="5" rx="2" fill="#ffd47f"/>
+        <circle cx="910" cy="644" r="15" fill="#111719"/><circle cx="910" cy="644" r="6" fill="#88928d"/>
+        <circle cx="1057" cy="644" r="15" fill="#111719"/><circle cx="1057" cy="644" r="6" fill="#88928d"/>
+      </g>
+      <path d="M0 812h1600" stroke="#ffffff" stroke-opacity=".06"/>
+    </svg>
+    <div class="welcome-shade"></div>
+
+    <header class="welcome-header">
+      <a class="brand-lockup" href="#" aria-label="CargaRuta inicio">
+        <span class="brand-glyph"><span></span><span></span><span></span></span>
+        <span class="brand-name">carga<span>ruta</span><small>BOLIVIA · LOGÍSTICA PESADA</small></span>
+      </a>
+      <div class="welcome-header-note"><span class="pulse-dot"></span> EJE TRONCAL · BOLIVIA</div>
+    </header>
+
+    <section class="welcome-layout">
+      <div class="welcome-copy">
+        <div class="welcome-overline"><span></span> CONECTAMOS CARGA. MOVEMOS BOLIVIA.</div>
+        <h1>Que cada<br>kilómetro<br><em>cuente.</em></h1>
+        <p>Menos viajes en vacío. Más carga para el camino.<br>Una plataforma hecha para el transporte pesado boliviano.</p>
+        <div class="welcome-route"><span class="route-start"></span><strong>Cochabamba</strong><i></i><strong>Oruro</strong><i></i><strong>La Paz</strong><span class="route-end">↗</span></div>
+        <div class="welcome-footnote"><span>01</span> RUTAS DEL ALTIPLANO <b>·</b> DISTANCIAS REFERENCIALES</div>
+      </div>
+
+      <section class="onboarding-card" aria-labelledby="profile-title">
+        <div class="onboarding-topline"><span>EMPECEMOS</span><span>01 <i>/</i> 01</span></div>
+        <h2 id="profile-title">¿Cómo te mueves<br>en la ruta?</h2>
+        <p class="onboarding-lead">Elige tu perfil para preparar tu espacio de trabajo.</p>
+        <button class="profile-choice" type="button" (click)="enterApp('carrier')">
+          <span class="profile-icon driver-icon">↗</span>
+          <span class="profile-copy"><strong>Soy chofer / transportista</strong><small>Busco cargas para mis rutas</small><span class="profile-benefit">Cotiza · Encuentra retorno · Reporta novedades</span></span>
+          <span class="choice-arrow">→</span>
+        </button>
+        <button class="profile-choice" type="button" (click)="enterApp('shipper')">
+          <span class="profile-icon shipper-icon">▣</span>
+          <span class="profile-copy"><strong>Soy generador de carga</strong><small>Quiero mover un envío</small><span class="profile-benefit">Explora rutas · Consulta unidades disponibles</span></span>
+          <span class="choice-arrow">→</span>
+        </button>
+        <div class="onboarding-trust"><span class="lock-icon">◇</span> Selección de perfil para personalizar la experiencia.<br><span class="onboarding-disclaimer">No reemplaza una cuenta ni verificación de identidad.</span></div>
+      </section>
+    </section>
+
+    <footer class="welcome-footer"><span>HECHO PARA QUIENES MUEVEN EL PAÍS</span><span>COCHABAMBA <i>—</i> ORURO <i>—</i> LA PAZ</span><span>© CARGARUTA</span></footer>
+  </main>
+} @else {
+  <div class="app-shell">
+    <aside class="sidebar">
+      <button class="brand-lockup app-brand" type="button" (click)="backToWelcome()" aria-label="Volver al inicio">
+        <span class="brand-glyph"><span></span><span></span><span></span></span>
+        <span class="brand-name">carga<span>ruta</span><small>BOLIVIA · LOGÍSTICA PESADA</small></span>
+      </button>
+      <div class="workspace-label">TU ESPACIO</div>
+      <a class="nav-link active" href="#inicio"><span>◫</span> Resumen</a>
+      <a class="nav-link" href="#mapa"><span>⌖</span> Mapa de rutas</a>
+      <a class="nav-link" href="#operaciones"><span>▤</span> {{ profile() === 'carrier' ? 'Cargas de retorno' : 'Cargas disponibles' }}</a>
+      <button class="nav-link" type="button" (click)="chatOpen.set(!chatOpen())"><span>✳</span> Asistente de ruta <i>IA</i></button>
+
+      <div class="sidebar-bottom">
+        <div class="sidebar-network"><span class="network-dot" [class.online]="apiOnline()"></span><div><strong>{{ apiOnline() ? 'Sistema conectado' : 'API sin conexión' }}</strong><small>{{ apiOnline() ? 'Datos locales disponibles' : 'Revisa el backend' }}</small></div></div>
+        <button class="profile-switch" type="button" (click)="backToWelcome()">
+          <span class="switch-avatar">{{ profile() === 'carrier' ? 'TR' : 'GC' }}</span>
+          <span><strong>{{ profile() === 'carrier' ? 'Transportista' : 'Generador de carga' }}</strong><small>{{ profile() === 'carrier' ? 'Perfil de transportista' : 'Perfil de generador' }}</small></span>
+          <span class="switch-icon">⌄</span>
+        </button>
+      </div>
+    </aside>
+
+    <main class="dashboard" id="inicio">
+      <header class="dashboard-header">
+        <div class="mobile-brand"><span class="brand-glyph"><span></span><span></span><span></span></span><strong>carga<span>ruta</span></strong></div>
+        <div class="dashboard-breadcrumb">Bolivia <span>/</span> <strong>{{ profile() === 'carrier' ? 'Espacio del transportista' : 'Espacio del generador' }}</strong></div>
+        <div class="header-right"><span class="header-status"><i [class.online]="apiOnline()"></i>{{ apiOnline() ? 'EN LÍNEA' : 'SIN CONEXIÓN' }}</span><button class="header-avatar" type="button" (click)="backToWelcome()" aria-label="Cambiar perfil">{{ profile() === 'carrier' ? 'TR' : 'GC' }}</button></div>
+      </header>
+
+      <section class="dashboard-intro">
+        <div><div class="date-kicker"><span class="sun-icon">☀</span> EL CAMINO NOS UNE</div>
+          <h1>{{ profile() === 'carrier' ? 'Buen viaje,' : 'Tu carga,' }} <em>{{ profile() === 'carrier' ? 'transportista.' : 'en buenas manos.' }}</em></h1>
+          <p>{{ profile() === 'carrier' ? 'Planea tu recorrido y encuentra carga para el regreso.' : 'Explora el corredor y las cargas registradas en la plataforma.' }}</p>
+        </div>
+        <button class="report-button" type="button" (click)="openReport()"><span>＋</span> Reportar novedad</button>
+      </section>
+
+      <div class="data-banner"><span class="banner-mark">!</span><p><strong>Planificación referencial.</strong> El trazado no es navegación GPS; alertas y peajes requieren confirmación oficial.</p><span class="banner-close">×</span></div>
+
+      <section class="stats-row" aria-label="Resumen del corredor">
+        <article class="stat-card"><span class="stat-icon stat-green">⌖</span><div><small>CIUDADES EN EL CORREDOR</small><strong>04 <i>Cochabamba · Oruro · Patacamaya · La Paz</i></strong></div></article>
+        <article class="stat-card"><span class="stat-icon stat-orange">⇄</span><div><small>TRAMOS CATALOGADOS</small><strong>{{ routes().length || '—' }} <i>Conexiones en ambos sentidos</i></strong></div></article>
+        <article class="stat-card"><span class="stat-icon stat-blue">▰</span><div><small>{{ profile() === 'carrier' ? 'CARGAS EN RETORNO' : 'CARGAS DISPONIBLES' }}</small><strong>{{ profile() === 'carrier' ? returnCargos().length : cargos().length }} <i>Registradas en plataforma</i></strong></div></article>
+      </section>
+
+      <section class="workspace-grid">
+        <article class="panel map-panel" id="mapa">
+          <div class="panel-heading">
+            <div><div class="panel-eyebrow">CORREDOR TRONCAL</div><h2>Mapa de ruta</h2></div>
+            <div class="map-switch" aria-label="Vista del mapa"><button type="button" [class.active]="mapMode() === 'country'" (click)="showCountryMap()">Bolivia completa</button><button type="button" [class.active]="mapMode() === 'route'" (click)="showRouteMap()">Ver tramo</button></div>
+          </div>
+          <div class="map-wrap"><iframe class="google-map" [src]="mapUrl()" title="Google Maps: Bolivia y el eje Cochabamba, Oruro y La Paz" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+            <div class="map-overlay map-top-overlay"><span class="map-layer-icon">⌖</span><span><strong>{{ mapMode() === 'country' ? 'Bolivia' : origin + ' → ' + destination }}</strong><small>{{ mapMode() === 'country' ? 'Vista completa del país' : 'Tramo en Google Maps' }}</small></span></div>
+            <div class="map-attribution-note">Mapa interactivo · Requiere conexión a Internet</div>
+          </div>
+          <div class="map-key"><span><i class="key-route"></i> Selecciona “Ver tramo” para consultar una ruta</span><span>Google Maps</span></div>
+          <div class="quick-routes">
+            <button type="button" (click)="selectRoute('Cochabamba', 'Oruro')"><span class="route-number">01</span><span><strong>Cochabamba <i>↔</i> Oruro</strong><small>Tramo principal</small></span><b>{{ routeDistance('Cochabamba', 'Oruro') }}</b><span class="quick-arrow">↗</span></button>
+            <button type="button" (click)="selectRoute('Oruro', 'La Paz')"><span class="route-number">02</span><span><strong>Oruro <i>↔</i> La Paz</strong><small>Vía Patacamaya</small></span><b>{{ routeDistance('Oruro', 'La Paz') }}</b><span class="quick-arrow">↗</span></button>
+          </div>
+        </article>
+
+        <div class="right-column">
+          @if (profile() === 'carrier') {
+            <article class="panel quote-panel" id="operaciones">
+              <div class="panel-heading"><div><div class="panel-eyebrow">ANTES DE SALIR</div><h2>Calcula tu recorrido</h2></div><span class="panel-heading-icon">↗</span></div>
+              <p class="panel-subtitle">Estima combustible y revisa cargas para tu retorno.</p>
+              <form class="quote-form" (ngSubmit)="requestQuote()">
+                <div class="route-selects">
+                  <label>ORIGEN<select name="origin" [(ngModel)]="origin">@for (location of locations; track location) { <option [ngValue]="location">{{ location }}</option> }</select></label>
+                  <button class="reverse-button" type="button" (click)="swapLocations()" aria-label="Invertir origen y destino">⇅</button>
+                  <label>DESTINO<select name="destination" [(ngModel)]="destination">@for (location of locations; track location) { <option [ngValue]="location">{{ location }}</option> }</select></label>
+                </div>
+                <div class="fuel-fields"><label>CONSUMO <span>L / 100 KM</span><input name="consumption" type="number" min="1" step="0.1" [(ngModel)]="fuelConsumption" required></label><label>DIÉSEL <span>BOB / L</span><input name="diesel" type="number" min="0.01" step="0.01" placeholder="Precio vigente" [(ngModel)]="dieselPrice"></label></div>
+                <p class="price-note">Ingresa el precio vigente aquí o configúralo en backend/.env.</p>
+                <button class="calculate-button" type="submit" [disabled]="loadingQuote()">{{ loadingQuote() ? 'Calculando…' : 'Calcular estimación' }} <span>→</span></button>
+              </form>
+              @if (quoteError()) { <div class="inline-error">{{ quoteError() }}</div> }
+              @if (quote(); as result) {
+                <div class="quote-result">
+                  <div class="result-total"><span>COSTO OPERATIVO ESTIMADO</span><strong>{{ formatBob(result.subtotalBob) }}</strong></div>
+                  <div class="result-line"><span>{{ result.origin }} → {{ result.destination }} · {{ result.distanceKm }} km</span><b>{{ result.fuelLiters }} L</b></div>
+                  <div class="result-line"><span>Costo estimado de combustible</span><b>{{ formatBob(result.fuelCostBob) }}</b></div>
+                  <div class="result-line"><span>Peajes</span><b>{{ result.tollsBob === null ? 'Por validar' : formatBob(result.tollsBob) }}</b></div>
+                  <small>{{ result.message }}</small>
+                </div>
+              }
+            </article>
+          } @else {
+            <article class="panel shipper-panel" id="operaciones">
+              <div class="panel-heading"><div><div class="panel-eyebrow">CARGA EN MOVIMIENTO</div><h2>Encuentra tu corredor</h2></div><span class="panel-heading-icon">▣</span></div>
+              <p class="panel-subtitle">Consulta las cargas disponibles registradas en la plataforma.</p>
+              <div class="corridor-chips"><button type="button" (click)="selectRoute('Cochabamba', 'Oruro')">Cochabamba <span>→</span> Oruro</button><button type="button" (click)="selectRoute('Oruro', 'La Paz')">Oruro <span>→</span> La Paz</button></div>
+              <div class="shipper-highlight"><span class="highlight-symbol">↗</span><div><strong>{{ cargos().length }} cargas disponibles</strong><small>Publicadas en el eje troncal</small></div><span class="highlight-arrow">↓</span></div>
+              <div class="small-caveat">La plataforma muestra registros existentes; la publicación y asignación de unidades aún no está habilitada.</div>
+            </article>
+          }
+
+          <article class="panel cargo-panel">
+            <div class="panel-heading">
+              <div><div class="panel-eyebrow">{{ profile() === 'carrier' ? 'OPORTUNIDADES DE RETORNO' : 'CARGAS PUBLICADAS' }}</div><h2>{{ profile() === 'carrier' ? 'Carga para volver' : 'Envíos en el corredor' }}</h2></div>
+              <span class="cargo-count">{{ profile() === 'carrier' ? returnCargos().length : cargos().length }}</span>
+            </div>
+            @if ((profile() === 'carrier' ? returnCargos() : cargos()).length) {
+              <div class="cargo-list">
+                @for (cargo of (profile() === 'carrier' ? returnCargos() : cargos()).slice(0, 3); track cargo.id) {
+                  <div class="cargo-item"><span class="cargo-icon">▤</span><div class="cargo-info"><strong>{{ cargo.description }}</strong><small>{{ cargo.origin }} <i>→</i> {{ cargo.destination }} · {{ cargo.weight_tons }} t</small></div><div class="cargo-price">{{ cargo.offered_price_bob ? formatBob(cargo.offered_price_bob) : 'A convenir' }}<small>FLETE</small></div></div>
+                }
+              </div>
+            } @else {
+              <div class="empty-cargo"><span>⌁</span><strong>{{ profile() === 'carrier' ? 'Aún no hay cargas para este retorno' : 'Todavía no hay cargas publicadas' }}</strong><small>{{ profile() === 'carrier' ? 'Prueba otro tramo o revisa más tarde.' : 'Las nuevas publicaciones aparecerán aquí.' }}</small></div>
+            }
+          </article>
+
+          <article class="panel alerts-panel">
+            <div class="panel-heading"><div><div class="panel-eyebrow">INFORMACIÓN DE RUTA</div><h2>Alertas registradas</h2></div><span class="alert-badge">{{ alerts().length }}</span></div>
+            <p class="alerts-caveat">{{ alertsNote() }}</p>
+            @if (alerts().length) {
+              <div class="alerts-list">@for (alert of alerts().slice(0, 2); track alert.id) { <div class="alert-item"><span class="alert-indicator"></span><div><strong>{{ alert.origin }} — {{ alert.destination }}</strong><p>{{ alert.message }}</p><small>{{ alert.source || 'Fuente no indicada' }}</small></div></div> }</div>
+            } @else {
+              <div class="no-alerts"><span>✓</span> No hay avisos activos registrados. Confirma el estado del camino antes de salir.</div>
+            }
+            @if (profile() === 'carrier') { <button class="text-action" type="button" (click)="openReport()">+ Reportar un bloqueo o novedad</button> }
+          </article>
+        </div>
+      </section>
+
+      <footer class="dashboard-footer"><span>CARGARUTA <i>·</i> HERRAMIENTA DE PLANIFICACIÓN</span><span>Distancias estimadas · Alertas no verificadas en tiempo real</span></footer>
+    </main>
+
+    <button class="assistant-fab" type="button" (click)="chatOpen.set(!chatOpen())" aria-label="Abrir asistente logístico"><span>✳</span><i>Asistente de ruta</i></button>
+    @if (chatOpen()) {
+      <section class="assistant-drawer" aria-label="Asistente de ruta">
+        <header><span class="assistant-avatar">✳</span><div><strong>Asistente de ruta</strong><small>Gemma 3 · local con Ollama</small></div><button type="button" (click)="chatOpen.set(false)" aria-label="Cerrar chat">×</button></header>
+        <div class="chat-messages" aria-live="polite">
+          @for (message of messages(); track $index) { <div class="chat-bubble" [class.from-user]="message.role === 'user'"><small>{{ message.role === 'assistant' ? 'ASISTENTE' : 'TÚ' }}</small><p>{{ message.text }}</p></div> }
+          @if (chatLoading()) { <div class="chat-bubble"><small>ASISTENTE</small><p class="typing">Consultando datos registrados…</p></div> }
+        </div>
+        @if (chatError()) { <div class="inline-error">{{ chatError() }}</div> }
+        <form class="chat-compose" (ngSubmit)="sendMessage()"><input name="chat" [ngModel]="chatInput()" (ngModelChange)="chatInput.set($event)" placeholder="Pregunta sobre rutas o cargas…" maxlength="2000" aria-label="Mensaje para el asistente"><button type="submit" [disabled]="chatLoading() || !chatInput().trim()" aria-label="Enviar mensaje">↑</button></form>
+        <div class="chat-disclaimer">Sin datos de tráfico o bloqueos en tiempo real.</div>
+      </section>
+    }
+
+    @if (reportOpen) {
+      <div class="modal-backdrop" (click)="closeReport()">
+        <section class="report-modal" role="dialog" aria-modal="true" aria-labelledby="report-title" (click)="$event.stopPropagation()">
+          <button class="modal-close" type="button" (click)="closeReport()" aria-label="Cerrar">×</button>
+          <div class="modal-icon">!</div><div class="panel-eyebrow">REPORTE DE CARRETERA</div><h2 id="report-title">¿Qué ocurre en la ruta?</h2>
+          <p class="modal-copy">Tu aviso se guardará para revisión. No aparecerá como alerta confirmada automáticamente.</p>
+          @if (reportStatus) { <div class="report-success"><span>✓</span>{{ reportStatus }}</div> } @else {
+            <form class="report-form" (ngSubmit)="submitReport()">
+              <label>TRAMO<select name="reportRoute" [(ngModel)]="reportRouteId" required>@for (route of routes(); track route.id) { <option [ngValue]="route.id">{{ route.origin }} → {{ route.destination }}</option> }</select></label>
+              <label>DESCRIBE LA NOVEDAD<textarea name="reportMessage" [(ngModel)]="reportMessage" rows="4" maxlength="1000" placeholder="Ej. bloqueo, restricción o condición observada…"></textarea></label>
+              @if (reportError) { <div class="inline-error">{{ reportError }}</div> }
+              <button class="calculate-button" type="submit" [disabled]="reportSending">{{ reportSending ? 'Enviando…' : 'Enviar para revisión' }} <span>→</span></button>
+            </form>
+          }
+          <button class="modal-secondary" type="button" (click)="closeReport()">{{ reportStatus ? 'Listo' : 'Cancelar' }}</button>
+        </section>
+      </div>
+    }
+  </div>
+}
