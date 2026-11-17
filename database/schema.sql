@@ -1,8 +1,26 @@
-CREATE DATABASE IF NOT EXISTS transporte
+CREATE DATABASE IF NOT EXISTS transporte_db
   CHARACTER SET utf8mb4
   COLLATE utf8mb4_unicode_ci;
 
-USE transporte;
+USE transporte_db;
+
+CREATE TABLE IF NOT EXISTS pricing_settings (
+  id TINYINT UNSIGNED NOT NULL PRIMARY KEY,
+  diesel_price_bob_per_liter DECIMAL(6,2) NOT NULL,
+  diesel_price_source VARCHAR(250) NOT NULL,
+  diesel_price_verified_at DATE NULL,
+  CONSTRAINT chk_pricing_settings_singleton CHECK (id = 1),
+  CONSTRAINT chk_diesel_price_positive CHECK (diesel_price_bob_per_liter > 0)
+);
+
+INSERT INTO pricing_settings
+  (id, diesel_price_bob_per_liter, diesel_price_source, diesel_price_verified_at)
+VALUES
+  (1, 3.72, 'Valor solicitado por el usuario; pendiente de validación oficial', NULL)
+ON DUPLICATE KEY UPDATE
+  diesel_price_bob_per_liter = VALUES(diesel_price_bob_per_liter),
+  diesel_price_source = VALUES(diesel_price_source),
+  diesel_price_verified_at = VALUES(diesel_price_verified_at);
 
 CREATE TABLE IF NOT EXISTS users (
   id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -86,8 +104,9 @@ CREATE TABLE IF NOT EXISTS route_reports (
 );
 
 -- Distancias preliminares para demostración, no son mediciones ni garantía de ruta.
--- Los peajes oficiales (Vías Bolivia) y costos de diésel quedan NULL hasta validarlos
--- con el informe del proyecto y una fuente vigente.
+-- Los peajes quedan NULL mientras no se verifiquen tarifas vigentes por categoría
+-- vehicular. El precio semilla del diésel es el valor solicitado por el usuario,
+-- no una confirmación de vigencia oficial.
 INSERT INTO routes
   (origin, destination, distance_km, diesel_cost_base_bob, tolls_bob, data_status, notes)
 VALUES

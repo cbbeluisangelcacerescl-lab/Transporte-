@@ -4,7 +4,7 @@ Aplicación local para explorar y cotizar carga pesada en el eje Cochabamba–Or
 
 El frontend inicia con una animación SVG original y selección obligatoria de perfil (chofer/transportista o generador de carga). Muestra Google Maps centrado en Bolivia, con una vista opcional del tramo seleccionado. Incluye cotizaciones, cargas registradas y alertas manuales. Los reportes de novedades se guardan en `route_reports` como pendientes de revisión y no se publican como bloqueos confirmados.
 
-> **Datos por validar:** no se adjuntó el informe de investigación. Las distancias cargadas en `database/schema.sql` son referencias preliminares; los importes de diésel y peajes de Vías Bolivia quedan sin valor oficial. La API calcula un subtotal de combustible y costos operativos, señala el peaje como pendiente y nunca presenta estas cifras como una cotización final verificada. Las alertas se cargan manualmente y no son un feed en tiempo real.
+> **Datos por validar:** no se adjuntó el informe de investigación. Las distancias cargadas en `database/schema.sql` son referencias preliminares. El precio de diésel de 3.72 BOB/litro es el valor solicitado para la configuración local, no una confirmación de su vigencia oficial. Los peajes siguen sin valor hasta validar tarifas vigentes según la categoría vehicular; la API los señala como pendientes y no presenta estas cifras como una cotización final verificada. Las alertas se cargan manualmente y no son un feed en tiempo real.
 
 ## Requisitos
 
@@ -16,8 +16,8 @@ El frontend inicia con una animación SVG original y selección obligatoria de p
 
 Desde la carpeta del proyecto:
 
-1. Crear la base de datos (PowerShell): `cmd /c "mysql -u root -p < database\schema.sql"`
-2. Configurar API: `Copy-Item backend\.env.example backend\.env`, luego editar `backend\.env`. Definir credenciales MySQL y el precio vigente de diésel (BOB/litro) validado por el proyecto. Mantener el valor sin configurar bloquea las cotizaciones; no se usa un precio inventado.
+1. Crear la base de datos (PowerShell, con MySQL en PATH): `cmd /c "mysql -u root < database\schema.sql"` (si tu usuario tiene contraseña, agrega `-p`).
+2. Configurar API: `Copy-Item backend\.env.example backend\.env`. El ejemplo configura MySQL local y 3.72 BOB/litro, valor proporcionado por el usuario y pendiente de validación oficial; actualízalo si corresponde.
 3. Instalar y arrancar backend: `cd backend; npm install; npm run dev`
 4. En otra terminal, descargar el modelo y arrancar Ollama: `ollama pull gemma3:latest` y `ollama serve`
 5. En una tercera terminal: `cd frontend; npm install; npm start`

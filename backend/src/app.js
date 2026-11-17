@@ -47,14 +47,10 @@ app.post('/api/quotes', async (req, res, next) => {
       if (!trucks.length) return res.status(404).json({ error: 'No se encontró un camión activo con ese ID.' });
       consumption = trucks[0].fuel_consumption_l_per_100km;
     }
-    const dieselPrice = req.body.dieselPriceBobPerLiter ?? process.env.DIESEL_PRICE_BOB_PER_LITER;
     const path = findRoutePath(await getRoutes(), origin, destination);
-    const quote = calculateQuote(path, {
-      fuelConsumptionLPer100Km: Number(consumption),
-      dieselPriceBobPerLiter: Number(dieselPrice),
-      maintenanceBobPerKm: Number(req.body.maintenanceBobPerKm ?? process.env.MAINTENANCE_BOB_PER_KM ?? 0),
-      driverCostBobPerKm: Number(req.body.driverCostBobPerKm ?? process.env.DRIVER_COST_BOB_PER_KM ?? 0),
-    });
+    const costOptions = await getCostOptions(req.body);
+    costOptions.fuelConsumptionLPer100Km = Number(consumption);
+    const quote = calculateQuote(path, costOptions);
     res.json({
       ...quote,
       message: quote.complete
@@ -75,8 +71,9 @@ app.post('/api/quotes/round-trip', async (req, res, next) => {
       }
     }
     const routes = await getRoutes();
-    const outbound = calculateQuote(findRoutePath(routes, origin, destination), getCostOptions(req.body));
-    const returnTrip = calculateQuote(findRoutePath(routes, destination, origin), getCostOptions(req.body));
+    const costOptions = await getCostOptions(req.body);
+    const outbound = calculateQuote(findRoutePath(routes, origin, destination), costOptions);
+    const returnTrip = calculateQuote(findRoutePath(routes, destination, origin), costOptions);
     const totalCostsBob = Number((outbound.subtotalBob + returnTrip.subtotalBob).toFixed(2));
     const totalRevenueBob = Number((Number(outboundRevenueBob || 0) + Number(returnRevenueBob || 0)).toFixed(2));
     res.json({
@@ -178,10 +175,17 @@ async function getRoutes() {
   return routes;
 }
 
-function getCostOptions(body) {
+async function getCostOptions(body) {
+  let dieselPrice = body.dieselPriceBobPerLiter ?? process.env.DIESEL_PRICE_BOB_PER_LITER;
+  if (dieselPrice === undefined || dieselPrice === '') {
+    const [settings] = await pool.query(
+      'SELECT diesel_price_bob_per_liter FROM pricing_settings WHERE id = 1',
+    );
+    dieselPrice = settings[0]?.diesel_price_bob_per_liter;
+  }
   return {
     fuelConsumptionLPer100Km: Number(body.fuelConsumptionLPer100Km),
-    dieselPriceBobPerLiter: Number(body.dieselPriceBobPerLiter ?? process.env.DIESEL_PRICE_BOB_PER_LITER),
+    dieselPriceBobPerLiter: Number(dieselPrice),
     maintenanceBobPerKm: Number(body.maintenanceBobPerKm ?? process.env.MAINTENANCE_BOB_PER_KM ?? 0),
     driverCostBobPerKm: Number(body.driverCostBobPerKm ?? process.env.DRIVER_COST_BOB_PER_KM ?? 0),
   };
